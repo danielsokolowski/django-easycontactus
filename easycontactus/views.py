@@ -33,7 +33,7 @@ class ContactUsIndexView(FormView):
         """ Adds extra content to our template """
         context = super(ContactUsIndexView, self).get_context_data(**kwargs)
         form_class = self.get_form_class()
-        form = form_class() #unbound
+        form = form_class(data=self.request.POST) #unbound
         context['contact_us_form'] = form
         return context
 
