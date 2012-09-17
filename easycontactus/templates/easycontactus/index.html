@@ -1,0 +1,10 @@
+{% extends "easycontactus/base.html" %}
+{% load url from future %}
+{% block easycontactus_body %}
+{{block.super}}
+	<form class="form easycontactus" action="{% url 'EasyContactUsIndexView' %}" enctype="multipart/form-data" method="post" onsubmit="" >
+	{% csrf_token %} 
+	{{ form.as_p}}
+	<input type="submit" value="Send Message" />
+</form>
+{% endblock %}

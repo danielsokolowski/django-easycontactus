@@ -1,10 +1,12 @@
 # Create your views here.
-from .forms import *
+#from .forms import *
+from .settings import *
+
 from django.conf import settings
 from django.views.generic import FormView
 from django.core.mail import EmailMessage
 from django.contrib import messages
-class ContactUsIndexView(FormView):
+class EasyContactUsIndexView(FormView):
     """  
     Index view to display a contact us form and process POST requests for it. 
     
@@ -23,17 +25,17 @@ class ContactUsIndexView(FormView):
     """
     ### view's settings
     # TemplateResponseMixin
-    template_name = 'contactus/index.html'
+    template_name = 'easycontactus/index.html'
     # FormView(FormMixing, ProcessFormView) settings
-    form_class = ContactUsForm
+    form_class = CONTACT_FORM_CLASS
     success_url = './'
 
     ### view's methods overrides 
     def get_context_data(self, **kwargs):
         """ Adds extra content to our template """
-        context = super(ContactUsIndexView, self).get_context_data(**kwargs)
+        context = super(EasyContactUsIndexView, self).get_context_data(**kwargs)
         form_class = self.get_form_class()
-        form = form_class(data=self.request.POST) #unbound
+        form = form_class(data=self.request.POST, files=self.request.FILES) #unbound
         context['contact_us_form'] = form
         return context
 
@@ -63,5 +65,5 @@ class ContactUsIndexView(FormView):
         email.send()
 
         messages.success(self.request, 'Your form has been submitted.')
-        return super(ContactUsIndexView, self).form_valid(form)
+        return super(EasyContactUsIndexView, self).form_valid(form)
 

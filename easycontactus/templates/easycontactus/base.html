@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>EasyContactUs!</title>
+{% block easycontactus_head %}
+<link rel="stylesheet" href="{{ STATIC_URL }}easycontactus/css/easycontactus_cart.css" type="text/css">
+{% endblock %}
+</head>
+<body>
+<h1>EasyContactUs - template: easycontactus/base.html</h1>
+<p>You have successfully installed easycontactus, to make it your own flavor you must  style it accordingly</p>
+<p>I recommend coping the entire 'easycontactus/templates/easycontactus' directory to your
+you project's template location and start changing as required by your project.</p>
+
+<p>The quickest would be to have 'easycontactus/base.html' extend your project's 'base.html', example :</p>
+
+<pre>
+&#123;&#37; extends "base.html" &#37;&#125;
+
+&#123;&#37; block head_title &#37;&#125;
+&#123;&#123; block.super &#125;&#125; | &#123;&#123;flatpage.title&#125;&#125;
+&#123;&#37; endblock &#37;&#125;
+
+&#123;&#37; block head_styles &#37;&#125;
+&#123;&#123; block.super &#125;&#125;
+&#123;&#37; endblock &#37;&#125;
+
+&#123;&#37; block head_scripts &#37;&#125;
+&#123;&#123; block.super &#125;&#125;
+&#123;&#37; endblock &#37;&#125;
+
+&#123;&#37; block head_extra &#37;&#125;
+&#123;&#123; block.super &#125;&#125;
+&#123;&#37; endblock &#37;&#125;
+
+&#123;&#37; block id_header &#37;&#125;
+&#123;&#123; block.super &#125;&#125;
+&#123;&#37; endblock &#37;&#125;
+
+&#123;&#37; block id_content &#37;&#125;
+	&#123;&#37; comment &#37;&#125; We are placing the canvas of easycontactus form within our site flow &#123;&#37; endcomment &#37;&#125;
+	&#123;&#37; block easycontactus_body &#37;&#125;
+	&#123;&#37; endblock &#37;&#125;
+&#123;&#37; endblock &#37;&#125;
+</pre>  
+
+<p>Feel free to reach out to me if you have any questions - <a href='mailto:daniel.sokolowski@danols.com'>Daniel Sokolowski</a></p>
+
+<h2>Products</h2>
+
+<section id='easycontactus'>
+{% block easycontactus_body %}
+{% endblock %}
+</section>
+
+</body>
+</html>

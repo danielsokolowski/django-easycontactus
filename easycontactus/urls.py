@@ -7,5 +7,5 @@ urlpatterns = patterns('',
     # the r'...' is a regular expression patter that matches an emtpy string --- project
     # urls.py must matches some other part of the url consumes it and passes the reminder
     # to this list. Read this # https://docs.djangoproject.com/en/dev/topics/http/urls/
-    url(r'^$', ContactUsIndexView.as_view(), name='ContactUsIndexView'),
+    url(r'^$', EasyContactUsIndexView.as_view(), name='EasyContactUsIndexView'),
 )

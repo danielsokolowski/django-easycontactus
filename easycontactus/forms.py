@@ -1,9 +1,4 @@
 from django import forms
-from django.template.loader import render_to_string
-from django.conf import settings
-from ckeditor.widgets import CKEditorWidget
-import datetime
-import calendar
 from django.core.exceptions import ValidationError
 
 
@@ -40,21 +35,27 @@ class HoneypotField(forms.Field):
         raise ValidationError('Anti-spam field changed in value.')
 
 
-class  ContactUsForm(forms.Form):
+class  EasyContactUsForm(forms.Form):
     ### form settings and configuration
     CAPTHCA_PHRASE = 'multiple' #captcha phrase to match
+    def __init__(self, *args, **kwargs):
+        super(EasyContactUsForm, self).__init__(*args, **kwargs)
+        # we redefine captcha at run time so that CAPTHCA_PHRASE is loaded
+        # from child properly if this form is extended, other wise depending 
+        # when super call to this class is called we might end up with the CAPTHCA_PHRASE
+        # from this this class and not our overiden child class
+        self.fields['captcha'] = forms.RegexField(max_length=20,
+                               help_text='Enter the word or phrase "%s"' % self.CAPTHCA_PHRASE,
+                               regex='^%s$' % self.CAPTHCA_PHRASE,
+                               error_messages={'invalid': 'Incorrect phrase, please try again.'})
 
     # django native
     required_css_class = 'required' # when specified ads a class=required to required 'rows' when rendering
-
     name = forms.CharField(max_length=100)
     phone = forms.CharField(max_length=12)
     email = forms.EmailField()
     found_us = forms.CharField(label='How did you find us')
     message = forms.CharField(widget=forms.Textarea())
-    captcha = forms.RegexField(max_length=20,
-                               help_text='Enter a word or phrase "%s"' % CAPTHCA_PHRASE,
-                               regex='^%s$' % CAPTHCA_PHRASE,
-                               error_messages={'invalid': 'Incorrect phrase, please try again.'})
+    captcha = forms.RegexField(max_length=20, regex='') # properly defined at run time in __init__
     honeypot = HoneypotField(initial='hello there')
 
