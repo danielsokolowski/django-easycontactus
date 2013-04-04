@@ -14,4 +14,4 @@ CONTACT_FORM_CLASS = getattr(settings, 'EASYCONTACTUS_CONTACT_FORM_CLASS', EasyC
 
 ### Sanity checks
 if not issubclass(CONTACT_FORM_CLASS, forms.Form):
-    raise ImproperlyConfigured("EASYCONTACTUS_CONTACT_FORM_CLASS must be an instance of `<class 'django.forms.forms.Form'>` but instead is: {0!r} ({1})".format(forms.Form, type(forms.Form)))
+	raise ImproperlyConfigured("EASYCONTACTUS_CONTACT_FORM_CLASS must be an instance of `<class 'django.forms.forms.Form'>` but instead is: {0!r} ({1})".format(forms.Form, type(forms.Form)))
