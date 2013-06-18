@@ -1,4 +1,6 @@
-*.log
-*.pot
+### Common ingnores
+# python byte code file
 *.pyc
-local_settings.py
+
+# WebDAV file system cache
+.DAV/
